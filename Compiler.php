@@ -1024,14 +1024,14 @@ class Compiler
         if (file_exists($path))
             return $path;
 
-        if (count($paths) < 1) {
+        if (isset($paths) && count($paths) < 1) {
 
             //We got no paths to search in. We use the include-path in that case
             $paths = explode(\PATH_SEPARATOR, get_include_path());
         }
 
         //Add the path were currently compiling in (e.g. include, extends)
-        if (count($this->files) > 0)
+        if (isset($this->files) && count($this->files) > 0)
             $paths[] = dirname(end($this->files));
 
         //Iterate paths and check file existence via realpath
